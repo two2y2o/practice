@@ -11,11 +11,21 @@ enemy_attack = 5
 #敵の防御力
 enemy_defense = 3
 
-#敵に与えるダメージの計算
-enemy_damage = brave_attack - enemy_defense
-#敵にダメージを与える
-enemy_hp = enemy_hp - enemy_damage
+#攻撃にランダム要素をいれる
+select_attack = rand(4)
 
+if select_attack == 0
+  puts "かいしんのいちげき！"
+  # randの範囲を20～30と大きく広げる
+  #敵に与えるダメージの計算
+  enemy_damage = brave_attack - enemy_defense + rand(20..30)
+  #敵にダメージを与える
+  enemy_hp = enemy_hp - enemy_damage
+else
+  puts "つうじょうこうげき"
+  enemy_damage = brave_attack - enemy_defense + rand(3..6)
+  enemy_hp = enemy_hp - enemy_damage
+end
 #敵に与えるダメージと残りHPの表示
 puts "敵に#{enemy_damage}を与えた！"
 puts "残りのHPは#{enemy_hp}だ。"
@@ -33,8 +43,18 @@ else
   puts "敵は死んだ"
 end
 
-brave_damage = enemy_attack - brave_defense
-brave_hp = brave_hp - brave_damage
+if select_attack == 0
+  puts "つうこんのいちげき！"
+  # randの範囲を20～30と大きく広げる
+  #勇者に与えるダメージの計算
+  brave_damage = enemy_attack - brave_defense + rand(20..30)
+  #勇者にダメージを与える
+  brave_hp = brave_hp - brave_damage
+else
+  puts "つうじょうこうげき"
+  brave_damage = enemy_attack - brave_defense + rand(3..4)
+  brave_hp = brave_hp - brave_damage
+end
 
 puts <<~TEXT
 勇者に#{brave_damage}を与えた！
